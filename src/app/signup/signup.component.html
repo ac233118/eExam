@@ -1,0 +1,49 @@
+<Section class="signupContainer" style="height: 100vh;">
+  <div class="row pt-5">
+    <div class="col-md-4 col-10 shadow mx-auto bg-transperent ">
+      <h3 class="text-center">Student Registration Form</h3>
+      <div class="row ml-md-1">
+        <form [formGroup] = 'userForm' (ngSubmit)='onSubmit()'>
+          <div class="form">
+            <div class="form-group">
+              <h5>Student Name</h5>
+              <div class="row">
+                <div class="col-6">
+                  <label for="name" class="control-label">First Name: </label>
+                  <input type="text" class="name form-control" formControlName="firstName">
+                  <div *ngIf='userForm.controls.firstName.errors.required && userForm.controls.firstName.touched'><div class="alert">name is required</div></div>
+                </div>
+                <div class="col-6">
+                  <label for="name" class="ml-2">Last Name: </label>
+                  <input type="text" class=" form-control name" formControlName="lastName">
+                </div>
+              </div>
+              
+  
+              
+            </div>
+            <div class="form-group">
+              <h5>Email Address</h5>
+              <input type="text" class="form-control" formControlName="email">
+            </div>
+            <div class="form-group">
+              <h5>Mobile Number:</h5>
+              <input type="text" class="form-control" formControlName="mobileNumber">
+            </div>
+            <h5>Upload the profile Photo</h5>
+            <div class="custom-file">
+              
+              <input type="file" name="photo" id="validatedCustomFile" class="custom-file-input" formControlName="image">
+              <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+            </div>
+            <div class="form-group mt-4 d-flex justify-content-between">
+              <button class=" btn btn-success" type="submit">Submit</button>
+              <button class="btn btn-danger">RESET</button>
+            </div>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</Section>
