@@ -2,7 +2,7 @@
   <div class="row pt-5">
     <div class="col-md-4 col-10 shadow mx-auto bg-transperent ">
       <h3 class="text-center">Student Registration Form</h3>
-      <div class="row ml-md-1">
+      <div class="row mx-md-1">
         <form [formGroup] = 'userForm' (ngSubmit)='onSubmit()'>
           <div class="form">
             <div class="form-group">
@@ -45,14 +45,24 @@
               </div>
             </div>
             <h5>Upload the profile Photo</h5>
-            <div class="custom-file">
+            <div class="row ml-md-1">
+              <div class="col-6 custom-file my-auto">
               
-              <input type="file" name="photo" id="validatedCustomFile" class="custom-file-input" formControlName="image">
-              <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                <input type="file" (change)="onFileChange($event)" name="photo" id="validatedCustomFile" class="custom-file-input"  accept="image/png, image/jpeg">
+                <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                
+              </div>
+              <div class="my-3 col-6 mx -auto text-center">
+                <img *ngIf="userForm.value.image" [src]="userForm.value.image" alt="" style="height: 150px; width: auto;">
+                <img *ngIf="!userForm.value.image" src="https://cdn.clipart.email/5756d6ccc30a3466bc4c9d8382c581b2_logo-person-user-png-clipart-black-black-and-white-brand-_728-724.jpeg" alt="" style="height: 150px; width: 125px;">
+              </div>
             </div>
+            
+            
             <div class="form-group mt-4 d-flex justify-content-between">
-              <button class=" btn btn-success" type="submit">Submit</button>
-              <button class="btn btn-danger">RESET</button>
+              
+              <button class="btn btn-danger" type="button" (click)="reset()">RESET</button>
+              <button class=" btn btn-success" type="submit" [disabled]='userForm.invalid'>Submit</button>
             </div>
           </div>
         </form>

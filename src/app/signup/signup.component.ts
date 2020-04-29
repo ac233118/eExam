@@ -17,12 +17,17 @@ export class SignupComponent implements OnInit {
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     mobileNumber: new FormControl('', [Validators.required, this.phoneNumberValidator]),
-    image: new FormControl('', [Validators.required])
+    image: new FormControl()
    });
 
    onSubmit(){
-    
-     console.log(this.userForm)
+    if(this.userForm.valid){
+      console.log(this.userForm)
+    }
+    else{
+      alert('Please fill mandetory data')
+    }
+     
    }
     phoneNumberValidator(
     control: AbstractControl
@@ -31,5 +36,27 @@ export class SignupComponent implements OnInit {
     return valid
       ? null
       : { invalidNumber: { valid: false, value: control.value } }
+  }
+
+
+  onFileChange(event:any) {
+    let reader = new FileReader();
+   console.log(event)
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+    console.log(reader)
+      reader.onload = () => {
+        this.userForm.patchValue({
+          image: reader.result
+          
+        });
+        
+        
+      };
+    }
+  }
+  reset(){
+    this.userForm.reset()
   }
 }
